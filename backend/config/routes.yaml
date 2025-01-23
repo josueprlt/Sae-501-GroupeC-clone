@@ -1,0 +1,141 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+auth_login:
+    path: /api/login
+    controller: App\Controller\AuthController::login
+
+auth_register:
+    path: /api/register
+    controller: App\Controller\AuthController::register
+
+logged:
+    path: /api/logged
+    controller: App\Controller\AuthController::logged
+
+is_admin:
+    path: /api/isadmin
+    controller: App\Controller\AuthController::isAdmin
+
+auth_logout:
+    path: /api/logout
+    controller: App\Controller\AuthController::logout
+
+recover_password:
+    path: /api/password/recover
+    controller: App\Controller\AuthController::recoverPassword
+
+validate_password_token:
+    path: /api/password/validate-token
+    controller: App\Controller\AuthController::validatePasswordToken
+
+reset_password:
+    path: /api/password/reset
+    controller: App\Controller\AuthController::resetPassword
+
+
+# -------------------------
+# API
+
+# Events
+
+highlighted_events:
+    path: /api/highlighted-events
+    controller: App\Controller\EventController::highlightedEvents
+
+event:
+    path: /api/event/{id}
+    controller: App\Controller\EventController::event
+
+create_event:
+    path: /api/create-event
+    controller: App\Controller\EventController::createEvent
+
+delete_event:
+    path: /api/delete-event/{id}
+    controller: App\Controller\EventController::deleteEvent
+
+update_event:
+    path: /api/update-event/{id}
+    controller: App\Controller\EventController::updateEvent
+
+search_events:
+    path: /api/search-events
+    controller: App\Controller\EventController::searchEvents
+
+register_event:
+    path: /api/register-event
+    controller: App\Controller\EventController::registerEvent
+
+confirm_registration:
+    path: /api/confirm-registration
+    controller: App\Controller\EventController::confirmRegistration
+
+remove_registration:
+    path: /api/remove-registration
+    controller: App\Controller\EventController::removeRegistration
+
+is_user_registered:
+    path: /api/users/is-registered/{id}
+    controller: App\Controller\UserController::isUserRegisteredToEvent
+
+join_event:
+    path: /api/events/join/{id}
+    controller: App\Controller\EventController::joinEvent
+
+leave_event:
+    path: /api/events/leave/{id}
+    controller: App\Controller\EventController::leaveEvent
+
+unique_location:
+    path: /api/unique-locations
+    controller: App\Controller\EventController::getUniqueLocations
+
+unique_user_names:
+    path: /api/unique-user-names
+    controller: App\Controller\UserController::getUniqueUserNames
+
+verify_token:
+    path: /api/verifyToken
+    controller: App\Controller\EventController::verifyToken
+
+# Users
+
+    
+user_profile_update:
+    path: /api/user/update/profile
+    controller: App\Controller\UserController::updateProfile
+
+user_settings_update:
+    path: /api/user/update/settings
+    controller: App\Controller\UserController::updateSettings
+
+user_image_update:
+    path: /api/user/update/image
+    controller: App\Controller\UserController::updateImage
+
+user-events:
+    path: /api/user-events
+    controller: App\Controller\UserController::getUserEvents
+
+user-created-events:
+    path: /api/user-created-events
+    controller: App\Controller\UserController::getUserCreatedEvents
+
+user_delete:
+    path: /api/user/delete
+    controller: App\Controller\UserController::deleteUser
+
+user-unique-locations:
+    path: /api/user-unique-locations
+    controller: App\Controller\UserController::getUserUniqueLocations
+
+# -------------------------
+# Admin
+
+# admin_dashboard:
+#     path: /dashboard
+#     controller: App\Controller\Admin\AdminController::dashboard

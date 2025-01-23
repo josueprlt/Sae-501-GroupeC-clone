@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	<style>
+		.container { display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center; font-family: sans-serif; }
+		img { width: 6rem; }
+		.custom-form { display: flex; justify-content: center; align-items: center; flex-direction: column; width: 75%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-top: 1.25rem; padding: 1rem; border: 1px solid #E5E7EB;border-radius: 0.375rem; }
+		.form-div { display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%; }
+		.input-div { width: 100%; display: flex; flex-direction: column; gap: 4px; margin-top: 12px; }
+		.custom-input { display: flex; height: 2rem; width: 100%; border-radius: 0.375rem; border: 1px solid #cbd5e0; background-color: #f7fafc; padding: 0.5rem 0.75rem; font-size: 0.875rem; outline-offset: 0.25rem; }
+		.custom-input::placeholder { color: #a0aec0; }
+		.div-btn { display: flex; justify-content: center; flex-direction: column; }
+		.btn { cursor: pointer; color: #fff; background-color: #1B1B1B; border: none; font-weight: 400; text-align: center; margin: 1rem auto; padding: 12px; font-size: 16px; border-radius: 0.25rem; transition: background-color 0.15s ease-in-out; }
+		.btn:hover { background-color: #3C3C3C; }
+		.custom-link { text-decoration: none; color: black; font-size: 14px; text-align: center; }
+		.custom-link:hover { text-decoration: underline; }
+        .link-forgetpassword { text-decoration: none; color: #64748B; font-size: 14px; text-align: right; }
+        .link-forgetpassword:hover { text-decoration: underline; }
+        .alert { color: red; }
+		@media(min-width: 768px) { img { width: 10rem; } .custom-form { width: 50%; } h2 { font-size: 30px; } }
+        @media(min-width: 1024px) { .custom-form { width: 515px; } .input-div { width: 384px; } }
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<img src="./logo2.svg" alt="Logo Icon"/>
+
+		{{ form_start(registrationForm, { 'attr': { 'class': 'custom-form' } }) }}
+		<h2>Créer un compte</h2>
+		{{ form_errors(registrationForm, { 'attr': { 'class': 'alert' } }) }}
+
+		<div class="form-div">
+			{# <div class="input-div">
+				{{ form_row(registrationForm.firstname, {label:'Prénom', 'attr': { 'class': 'custom-input', placeholder: 'Prénom' } }) }}
+			</div>
+			<div class="input-div">
+				{{ form_row(registrationForm.name, {label:'Nom', 'attr': { 'class': 'custom-input', placeholder: 'Nom' } }) }}
+			</div> #}
+			<div class="input-div">
+				{{ form_row(registrationForm.email, {label:'Email', 'attr': { 'class': 'custom-input', placeholder: 'Email' } }) }}
+			</div>
+			<div class="input-div">
+				{{ form_row(registrationForm.plainPassword, {label:'Mot de passe', 'attr': { 'class': 'custom-input', placeholder: 'Mot de passe' } }) }}
+			</div>
+			{# <div class="input-div">
+				{{ form_row(registrationForm.plainPassword, {label:'Mot de passe', 'attr': { 'class': 'custom-input', placeholder: 'Mot de passe' } }) }}
+			</div> #}
+			{# <div class="input-div">
+				{{ form_row(registrationForm.agreeTerms, {label: 'Accepter le règlement'}) }}
+			</div> #}
+		</div>
+
+		<div class='div-btn'>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+		    <button type="submit" class="btn">Créer son compte</button>
+			<a class='custom-link' href="/login">Déjà un compte ? Se connecter</a>
+		</div>
+
+		{{ form_end(registrationForm) }}
+	</div>
+
+{% endblock %}

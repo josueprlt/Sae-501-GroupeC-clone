@@ -1,0 +1,101 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Bienvenue dans l'administration</h1>
+        <p>Utilisez le menu à gauche pour naviguer dans les différentes sections de l'administration.</p>
+        <ul>
+            <li>
+                <h3>Répartition des événements publics et privés</h2>
+                <canvas id="eventChart"></canvas>
+            </li>
+            <li>
+                <h3>Répartition des utilisateurs par tranche d'âge</h3>
+                <canvas id="ageChart"></canvas>
+            </li>
+        </ul>
+    </div>
+
+    <style>
+        .container ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 5rem;
+            width: 100%;
+            list-style: none;
+            padding: 0;
+        }
+        .container h3 {
+            text-align: center;
+        }
+
+        .container ul li {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctxEvent = document.getElementById('eventChart').getContext('2d');
+            var eventChart = new Chart(ctxEvent, {
+                type: 'pie',
+                data: {
+                    labels: ['Public', 'Privé'],
+                    datasets: [{
+                        label: 'Répartition des événements',
+                        data: [{{ eventCounts.public }}, {{ eventCounts.private }}],
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Répartition des événements publics et privés'
+                        }
+                    }
+                }
+            });
+
+            var ctxAge = document.getElementById('ageChart').getContext('2d');
+            var ageChart = new Chart(ctxAge, {
+                type: 'bar',
+                data: {
+                    labels: ['Moins de 18', '18-24', '25-34', '35-44', 'Au dessus de 45'],
+                    datasets: [{
+                        label: 'Nombre d\'utilisateurs',
+                        data: [{{ ageRanges['under_18'] }}, {{ ageRanges['18_24'] }}, {{ ageRanges['25_34'] }}, {{ ageRanges['35_44'] }}, {{ ageRanges['above_45'] }}],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Répartition des utilisateurs par tranche d\'âge'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+
